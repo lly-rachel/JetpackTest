@@ -35,4 +35,13 @@
         android:text="clear"
         />
 
+    <Button
+        android:id="@+id/getUserButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/buttonClear"
+        android:backgroundTint="#33303030"
+        android:text="Get User"
+        />
+
 </RelativeLayout>

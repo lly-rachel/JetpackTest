@@ -42,6 +42,17 @@ class MainActivity : AppCompatActivity() {
 
         lifecycle.addObserver(MyObserver(this.lifecycle))
 
+
+
+        binding.getUserButton.setOnClickListener {
+            val userId = (0..1000).random().toString()
+            viewModel.getUser(userId)
+        }
+        viewModel.user.observe(this){user ->
+            binding.countTv.text = user.firstName
+        }
+
+
         setContentView(binding.root)
     }
 
