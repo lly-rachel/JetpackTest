@@ -44,4 +44,13 @@
         android:text="Get User"
         />
 
+    <Button
+        android:id="@+id/doWorkButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/getUserButton"
+        android:backgroundTint="#33303030"
+        android:text="Do Work"
+        />
+
 </RelativeLayout>

@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import androidx.core.content.edit
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProviders
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.example.jetpacktest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -52,6 +54,12 @@ class MainActivity : AppCompatActivity() {
             binding.countTv.text = user.firstName
         }
 
+
+        //Worker
+        binding.doWorkButton.setOnClickListener {
+            val request = OneTimeWorkRequest.Builder(SimpleWorker::class.java).build()
+            WorkManager.getInstance(this).enqueue(request)
+        }
 
         setContentView(binding.root)
     }
