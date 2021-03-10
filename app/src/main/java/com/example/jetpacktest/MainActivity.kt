@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.content.edit
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProviders
 import com.example.jetpacktest.databinding.ActivityMainBinding
 
@@ -29,27 +29,28 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.buttonCount.setOnClickListener {
-            viewModel.counter++
-            refreshCount()
+            viewModel.plusOne()
         }
 
         binding.buttonClear.setOnClickListener {
-            viewModel.counter = 0
-            refreshCount()
+           viewModel.clear()
         }
 
-        refreshCount()
+        viewModel.counter.observe(this){ count ->
+            binding.countTv.text = count.toString()
+        }
+
+        lifecycle.addObserver(MyObserver(this.lifecycle))
+
         setContentView(binding.root)
     }
 
-    private fun refreshCount() {
-        binding.countTv.text = viewModel.counter.toString()
-    }
+
 
     override fun onPause() {
         super.onPause()
         sp.edit {
-            putInt("count_reserved",viewModel.counter)
+            putInt("count_reserved",viewModel.counter.value?:0)
         }
     }
 }
